@@ -72,18 +72,3 @@ int longestOfSubstringWithoutReaptChar(char *str)
 
   return operation(NULL, RETURN_LEN);
 }
-
-int main(int argc, char **argv)
-{
-  int ans;
-
-  if (argc != 2) {
-    printf("Usage: test-util [string]\n");
-    return -1;
-  }
-
-  ans = func(argv[1]);
-  printf("%d\n", ans);
-
-  return 0;
-}
