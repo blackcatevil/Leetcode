@@ -75,7 +75,7 @@ int** threeSum(int* nums, int numsSize, int* returnSize)
 	ptr[1] = nums[j];
 	ptr[2] = nums[k];
 
-	ans = (int*)realloc(ans, sizeof(int*)*size);
+	ans = (int**)realloc(ans, sizeof(int*)*size);
 	ans[size-1] = ptr;
 	j++;
       } else {
