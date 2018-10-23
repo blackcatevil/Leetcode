@@ -22,6 +22,7 @@ void _permute(int* nums, int numsSize, int* returnSize)
     memcpy(ans[(*returnSize)-1], Nums, sizeof(int)*Size);
     return;
   }
+
   for (int i = 0; i < numsSize; i++) {
     _swap(nums, nums+i);
     _permute(nums+1, numsSize-1, returnSize);
