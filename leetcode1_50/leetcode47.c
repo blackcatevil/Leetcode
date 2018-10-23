@@ -59,6 +59,7 @@ void _permuteUnique(int* nums, int numsSize, int* returnSize)
   for (int i = 0; i < numsSize; i++) {
     if (i != 0 && *(nums+i) == *(nums+i-1))
       continue;
+
     _swap(nums, nums+i);
     mergesort(nums, 1, numsSize-1);
     _permuteUnique(nums+1, numsSize-1, returnSize);
