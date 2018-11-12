@@ -50,13 +50,15 @@ struct Interval* merge(struct Interval* intervals, int intervalsSize, int* retur
   if (intervalsSize == 0)
     return NULL;
 
+  ans = malloc(sizeof(struct Interval));
   *returnSize = 1;
-  if (intervalsSize == 1)
-    return intervals;
+  if (intervalsSize == 1) {
+    ans[0].start = intervals[0].start;
+    ans[0].end = intervals[0].end;
+    return ans;
+  }
 
   mergesort(intervals, 0, intervalsSize-1);
-
-  ans = malloc(sizeof(struct Interval));
 
   for (int i = 0; i < intervalsSize-1; i++) {
     if (intervals[i].end >= intervals[i+1].start) {
