@@ -43,7 +43,6 @@ void mergesort(struct Interval* a, int front, int end)
 struct Interval* merge(struct Interval* intervals, int intervalsSize, int* returnSize)
 {
   struct Interval* ans;
-  struct Interval tmp;
   int size = 0;
 
   *returnSize = 0;
@@ -53,8 +52,7 @@ struct Interval* merge(struct Interval* intervals, int intervalsSize, int* retur
   ans = malloc(sizeof(struct Interval));
   *returnSize = 1;
   if (intervalsSize == 1) {
-    ans[0].start = intervals[0].start;
-    ans[0].end = intervals[0].end;
+    ans[0] = intervals[0];
     return ans;
   }
 
@@ -68,15 +66,13 @@ struct Interval* merge(struct Interval* intervals, int intervalsSize, int* retur
     } else {
       size++;
       ans = (struct Interval*)realloc(ans, sizeof(struct Interval)*size);
-      ans[size-1].start = intervals[i].start;
-      ans[size-1].end = intervals[i].end;
+      ans[size-1] = intervals[i];
     }
   }
 
   size++;
   ans = (struct Interval*)realloc(ans, sizeof(struct Interval)*size);
-  ans[size-1].start = intervals[intervalsSize-1].start;
-  ans[size-1].end = intervals[intervalsSize-1].end;
+  ans[size-1] = intervals[intervalsSize-1];
 
   *returnSize = size;
   return ans;
