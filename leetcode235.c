@@ -9,47 +9,28 @@ struct TreeNode {
 
 struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p, struct TreeNode* q)
 {
-  struct TreeNode** stack;
-  struct TreeNode* tmp;
-  int size;
+  struct TreeNode* current = root;
 
   if (root == NULL)
     return NULL;
 
-  tmp = root;
-  stack = malloc(sizeof(struct TreeNode*));
-  size = 0;
-  while (tmp != p) {
-    if (tmp == q) {
-      free(stack);
+  while (current != NULL) {
+    if (p->val == current->val)
+      return p;
+    if (q->val == current->val)
       return q;
-    }
+    if ((p->val > current->val && q->val < current->val) ||
+	(q->val > current->val && p->val < current->val))
+      return current;
 
-    stack = (struct TreeNode**)realloc(stack, sizeof(struct TreeNode*)*(size+1));
-    stack[size++] = tmp;
-    if (p->val > tmp->val)
-      tmp = tmp->right;
+    if (p->val > current->val && q->val > current->val)
+      current = current->right;
     else
-      tmp = tmp->left;
-  }
-  stack = (struct TreeNode**)realloc(stack, sizeof(struct TreeNode*)*(size+1));
-  stack[size++] = tmp;
-
-  tmp = root;
-  for (int i = 0; i < size; i++) {
-    if (stack[i] != tmp) {
-      tmp = stack[i-1];
-      free(stack);
-      return tmp;
-    }
-
-    if (q->val > tmp->val)
-      tmp = tmp->right;
-    else
-      tmp = tmp->left;
+      current = current->left;
   }
 
-  return p;
+  // Input error!!
+  return NULL;
 }
 
 int main()
